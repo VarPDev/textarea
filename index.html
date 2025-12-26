@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="favicon.png">
 <title>Textarea</title>
 <style>
   * {
@@ -47,6 +51,9 @@
       download()
     }
   })
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+  }
 
   console.log('%cGitHub https://github.com/antonmedv/textarea', 'font-size: 16px; border: 1px solid lightblue; border-radius: 12px; padding: 10px 14px; ')
 
@@ -74,6 +81,7 @@
   }
 
   async function set(hash) {
+    if (!hash) return
     const [content, style] = (await decompress(hash.slice(1))).split('\x00')
     article.textContent = content
     if (style) article.setAttribute('style', style)
