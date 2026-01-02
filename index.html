@@ -251,7 +251,7 @@
   addEventListener('hashchange', load)
   addEventListener('load', () => new MutationObserver(save).observe(article, {attributeFilter: ['style']}))
   addEventListener('keydown', e => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+    if ((e.metaKey || e.ctrlKey) && e.code === 'KeyS') {
       e.preventDefault()
       download()
     }
@@ -722,11 +722,11 @@
     }
 
     function isUndo(event) {
-      return isCtrl(event) && !event.shiftKey && event.key === 'z'
+      return isCtrl(event) && !event.shiftKey && event.code === 'KeyZ'
     }
 
     function isRedo(event) {
-      return isCtrl(event) && event.shiftKey && event.key === 'z'
+      return isCtrl(event) && event.shiftKey && event.code === 'KeyZ'
     }
 
     function toString() {
